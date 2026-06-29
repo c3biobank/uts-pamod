@@ -96,6 +96,8 @@ All exceptions derive from `UTSError`:
 - **MCU**: STM32F072RB (Nucleo-F072RB)
 - **Connection**: USB-CDC (`/dev/ttyACM0`) or UART (`/dev/ttyS0`) at 115200 8N1
 
+**Note: The PAM device (STM32F072RB) needs to be connected to the Raspberry Pi for at least 10 seconds before the Pi can issue any command to it.** 
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
