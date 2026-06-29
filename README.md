@@ -6,8 +6,13 @@ Compatible with **Ubuntu Linux** and **Raspberry Pi 3/4/5**.
 
 ## Installation
 
+1. cd to your working directory
+2. run bash
+
 ```bash
-pip install uts-pamod
+git clone https://github.com/c3biobank/uts-pamod.git
+cd uts-pamod
+pip install .            # or: pip install -e .  for editable/dev
 ```
 
 ## Quick start
@@ -61,14 +66,14 @@ asyncio.run(main())
 | `get_measuring_led()` | Current measuring LED value, 0–4095 |
 | `get_saturation_led()` | Current saturation LED value, 0–4095 |
 | `get_reference_led()` | Current reference LED value, 0–4095 |
-| `measure_od()` | Returns `list[int]` of 11 ADC readings |
+| `measure_od()` | Returns `list[int]` of 11 ADC readings, discard the first value |
 | `measure_ojip()` | Returns `list[int]` of 4096 ADC samples |
 | `measure_pam()` | Returns `list[int]` of 1024 ADC samples |
 
 All values are raw 16-bit ADC counts (uint16, 0–65535).
 LED index `n`: 0=measuring, 1=saturation, 2=reference.
 
-To skip auto-discovery, pass an explicit port:
+**To skip auto-discovery, pass an explicit port:**
 
 ```python
 async with UTSSensor(port="/dev/ttyACM0") as sensor:
@@ -90,15 +95,6 @@ All exceptions derive from `UTSError`:
 
 - **MCU**: STM32F072RB (Nucleo-F072RB)
 - **Connection**: USB-CDC (`/dev/ttyACM0`) or UART (`/dev/ttyS0`) at 115200 8N1
-- **Protocol**: Binary framing with CRC-16/CCITT-FALSE
-
-## Development
-
-```bash
-git clone ...
-pip install -e ".[test]"
-pytest -v
-```
 
 ## License
 
